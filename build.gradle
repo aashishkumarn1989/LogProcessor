@@ -1,0 +1,46 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.cs.logprocessor'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+bootJar {
+	mainClassName = 'org.springframework.batch.core.launch.support.CommandLineJobRunner'
+
+}
+
+dependencies {
+	implementation('org.springframework.boot:spring-boot-starter-batch')
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-batch', version: '2.0.6.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.6.RELEASE'
+	runtimeOnly('org.hsqldb:hsqldb')
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	testImplementation('org.springframework.batch:spring-batch-test')
+	compile 'com.google.guava:guava:26.0-jre'
+	testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
+	compile group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
+	
+
+
+
+}
